@@ -6,7 +6,7 @@ import { promisify } from 'util'
 
 import { ResourceVersion } from '../types'
 import { DefinitionBuilder } from './buildDocJson'
-import { antdComponentMap, antdComponentMapV4 } from './componentMap'
+import { antdComponentMap, antdComponentMapV4, antdComponentMapV5 } from './componentMap'
 import { ANTD_GITHUB, STORAGE } from './constant'
 import { buildShaMap, downloadByShaMap } from './fetchDocs'
 
@@ -15,11 +15,13 @@ const pWriteFile = promisify(fs.writeFile)
 const sourceVersion = {
   v3: ANTD_GITHUB.V3_SOURCE_TAG,
   v4: ANTD_GITHUB.V4_SOURCE_TAG,
+  v5: ANTD_GITHUB.V5_SOURCE_TAG,
 } as const
 
 const mapVersion = {
   v3: antdComponentMap,
   v4: antdComponentMapV4,
+  v5: antdComponentMapV5,
 } as const
 
 /**
@@ -92,7 +94,7 @@ async function clean(scope: ('markdown' | 'json')[]) {
 /**
  * Download docs and parse it to ast if argument set to true
  */
-async function buildResource({ v3, v4, download }: Record<'v3' | 'v4' | 'download', boolean>) {
+async function buildResource({ v3, v4, v5, download }: Record<'v3' | 'v4' | 'v5' | 'download', boolean>) {
   clean(download ? ['markdown', 'json'] : ['json'])
   console.log(logSymbols.success, 'resource cleaned')
 
@@ -105,6 +107,11 @@ async function buildResource({ v3, v4, download }: Record<'v3' | 'v4' | 'downloa
     console.log(logSymbols.info, 'start fetching v4')
     await buildVersionResource('v4', download)
   }
+
+  if (v5) {
+    console.log(logSymbols.info, 'start fetching v5')
+    await buildVersionResource('v5', download)
+  }
 }
 
 /**
@@ -113,5 +120,6 @@ async function buildResource({ v3, v4, download }: Record<'v3' | 'v4' | 'downloa
 buildResource({
   v3: true,
   v4: true,
+  v5: true,
   download: process.env.DOWNLOAD === 'true',
 })

@@ -77,10 +77,16 @@ export async function buildShaMap(tag: string): Promise<IShaMap> {
     })
 
     if (Array.isArray(folderRes.data)) {
-      shaMap[name] = {
-        enSha: folderRes.data.find((file) => file.name === ANTD_GITHUB.EN_MD_NAME)!.sha,
-        zhSha: folderRes.data.find((file) => file.name === ANTD_GITHUB.ZH_MD_NAME)!.sha,
+      try {
+        shaMap[name] = {
+          enSha: folderRes.data.find((file) => file.name === ANTD_GITHUB.EN_MD_NAME)!.sha,
+          zhSha: folderRes.data.find((file) => file.name === ANTD_GITHUB.ZH_MD_NAME)!.sha,
+        }
+      } catch(e) {
+        console.log('name: ',name);
+
       }
+
     }
   })
 

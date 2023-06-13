@@ -68,7 +68,7 @@ import { Position, Uri, Range } from 'vscode'
 /**
  * Major version of antd that resource based on
  */
-export type ResourceVersion = 'v3' | 'v4'
+export type ResourceVersion = 'v3' | 'v4' | 'v5'
 
 /**
  * A position in the editor. This interface is suitable for serialization.

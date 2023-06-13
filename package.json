@@ -152,11 +152,6 @@
     "typescript": "^3.8.3",
     "vscode-languageserver": "^6.1.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.ts": [
       "prettier --write",

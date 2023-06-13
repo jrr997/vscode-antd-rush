@@ -6,6 +6,7 @@ export const ANTD_GITHUB = {
   REPO_NAME: 'ant-design',
   V3_SOURCE_TAG: '3.26.20',
   V4_SOURCE_TAG: '4.16.1',
+  V5_SOURCE_TAG: '5.6.1',
   EN_MD_NAME: 'index.en-US.md',
   ZH_MD_NAME: 'index.zh-CN.md',
 } as const

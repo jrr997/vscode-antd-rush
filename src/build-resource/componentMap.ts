@@ -11,3 +11,4 @@ export interface ComponentDocLocation {
 import { antdComponentMapV3 } from './versions/v3'
 export { antdComponentMapV3 as antdComponentMap }
 export { antdComponentMapV4 } from './versions/v4'
+export { antdComponentMapV5 } from './versions/v5'
